@@ -19,5 +19,8 @@ bld.Services.AddSingleton<ICatRepository, CatRepository>();
 bld.Services.AddSingleton<IDogRepository, DogRepository>();
 
 var app = bld.Build();
+
+app.MapGet("/health", () => new { status = "All pets are healthy!" });
+
 app.UseFastEndpoints().UseSwaggerGen();
 app.Run();

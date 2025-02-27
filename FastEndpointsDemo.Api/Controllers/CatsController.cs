@@ -30,7 +30,7 @@ public class CatsController(ISender sender) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> AddCat(Guid id)
+    public async Task<IActionResult> GetCat(Guid id)
     {
         var command = new GetCatCommand(id);
 

@@ -25,7 +25,7 @@ public class DogsController(ISender sender) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> AddDog(Guid id)
+    public async Task<IActionResult> GetDog(Guid id)
     {
         var command = new GetDogCommand(id);
 

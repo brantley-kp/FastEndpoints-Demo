@@ -20,6 +20,9 @@ public class Add(ISender sender) : Endpoint<AddRequest, AddResponse>
 
         var id = await sender.Send(command);
 
-        await SendAsync(new() { Id = id });
+        // FastEndpoint's MediatR Send() alternative
+        // var id = await command.ExecuteAsync();
+
+        await SendAsync(new() { Id = id }, statusCode: 200);
     }
 }

@@ -12,12 +12,7 @@ public class DogsController(ISender sender) : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> AddDog(AddDogRequest req)
     {
-        if (req.Name.Equals("string", StringComparison.OrdinalIgnoreCase))
-        {
-            return new BadRequestObjectResult("Who names their dog \"string\"??");
-        }
-
-        if (req.Name.Equals("fluffy", StringComparison.OrdinalIgnoreCase))
+        if (!IsValidName(req.Name))
         {
             return new BadRequestObjectResult("Name is too generic!");
         }
@@ -48,4 +43,8 @@ public class DogsController(ISender sender) : ControllerBase
             IsGood = dog.IsGood
         });
     }
+
+    private static bool IsValidName(string name) =>
+        !name.Equals("string", StringComparison.OrdinalIgnoreCase) &&
+        !name.Equals("fluffy", StringComparison.OrdinalIgnoreCase);
 }

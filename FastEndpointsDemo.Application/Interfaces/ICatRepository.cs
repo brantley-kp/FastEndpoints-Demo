@@ -6,5 +6,5 @@ public interface ICatRepository
 {
     public Task Add(Cat cat);
 
-    public Task<Cat> Get(Guid id);
+    public Task<Cat?> Get(Guid id);
 }

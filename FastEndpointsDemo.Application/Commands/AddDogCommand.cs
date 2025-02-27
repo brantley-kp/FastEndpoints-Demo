@@ -4,13 +4,15 @@ using MediatR;
 
 namespace FastEndpointsDemo.Application.Commands;
 
-public readonly record struct AddDogCommand(string Name) : IRequest;
+public readonly record struct AddDogCommand(string Name) : IRequest<Guid>;
 
-public class AddDogCommandHandler(IDogRepository dogRepository) : IRequestHandler<AddDogCommand>
+public class AddDogCommandHandler(IDogRepository dogRepository) : IRequestHandler<AddDogCommand, Guid>
 {
-    public async Task Handle(AddDogCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(AddDogCommand request, CancellationToken cancellationToken)
     {
-        var dog = new Dog(Guid.NewGuid(), request.Name);
+        var id = Guid.NewGuid();
+        var dog = new Dog(id, request.Name);
         await dogRepository.Add(dog);
+        return id;
     }
 }

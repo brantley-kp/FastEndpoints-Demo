@@ -1,6 +1,6 @@
-namespace FastEndpointsDemo.Api.Endpoints.Cats;
+namespace FastEndpointsDemo.Api.Endpoints.Dogs;
 
-public record GetResponse
+public class GetResponse
 {
     public required Guid Id { get; set; }
 

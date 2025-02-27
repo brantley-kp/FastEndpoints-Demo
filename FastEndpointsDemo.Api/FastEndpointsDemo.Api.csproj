@@ -10,4 +10,8 @@
     <ProjectReference Include="..\FastEndpointsDemo.Infrastructure\FastEndpointsDemo.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.34.0" />
+  </ItemGroup>
+
 </Project>

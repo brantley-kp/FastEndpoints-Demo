@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace FastEndpointsDemo.Api.Endpoints.Cats;
+namespace FastEndpointsDemo.Api.Endpoints.Dogs;
 
 public class GetRequest
 {

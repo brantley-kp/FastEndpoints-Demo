@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Added here so we can show off FastEndpoints' MediatR-like capabilities (otherwise we'd just add to the API layer) -->
     <ProjectReference Include="..\FastEndpointsDemo.Domain\FastEndpointsDemo.Domain.csproj" />
   </ItemGroup>
 

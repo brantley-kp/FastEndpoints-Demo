@@ -9,28 +9,38 @@ namespace FastEndpointsDemo.Application.Commands;
 /// Demonstration of FastEndpoints out-of-the-box MediatR replacement
 /// </remarks>
 public readonly record struct AddCatCommand(string Name, bool IsGood) :
-    IRequest, // MediatR
-    ICommand; // FastEndpoints
+    IRequest<Guid>, // MediatR
+    ICommand<Guid>; // FastEndpoints
 
 public class AddCatCommandHandler(ICatRepository catRepository) :
-    IRequestHandler<AddCatCommand>, // MediatR
-    ICommandHandler<AddCatCommand> // FastEndpoints
+    IRequestHandler<AddCatCommand, Guid>, // MediatR
+    ICommandHandler<AddCatCommand, Guid> // FastEndpoints
 {
     /// <remarks>
     /// MediatR implementation
     /// </remarks>
-    public async Task Handle(AddCatCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(AddCatCommand request, CancellationToken cancellationToken)
     {
-        var cat = new Cat(Guid.NewGuid(), request.Name, request.IsGood);
+        var id = Guid.NewGuid();
+
+        var cat = new Cat(id, request.Name, request.IsGood);
+
         await catRepository.Add(cat);
+
+        return id;
     }
 
     /// <remarks>
     /// FastEndpoints implementation
     /// </remarks>
-    public async Task ExecuteAsync(AddCatCommand command, CancellationToken ct)
+    public async Task<Guid> ExecuteAsync(AddCatCommand command, CancellationToken ct)
     {
-        var cat = new Cat(Guid.NewGuid(), command.Name, command.IsGood);
+        var id = Guid.NewGuid();
+
+        var cat = new Cat(id, command.Name, command.IsGood);
+
         await catRepository.Add(cat);
+
+        return id;
     }
 }

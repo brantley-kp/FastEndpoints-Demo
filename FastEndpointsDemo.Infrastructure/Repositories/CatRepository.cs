@@ -14,8 +14,13 @@ public class CatRepository : ICatRepository
         return Task.CompletedTask;
     }
 
-    public Task<Cat> Get(Guid id)
+    public Task<Cat?> Get(Guid id)
     {
-        return Task.FromResult(_mockStore[id]);
+        if (!_mockStore.ContainsKey(id))
+        {
+            return Task.FromResult<Cat?>(null);
+        }
+
+        return Task.FromResult<Cat?>(_mockStore[id]);
     }
 }

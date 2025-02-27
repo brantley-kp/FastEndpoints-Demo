@@ -14,8 +14,13 @@ public class DogRepository : IDogRepository
         return Task.CompletedTask;
     }
 
-    public Task<Dog> Get(Guid id)
+    public Task<Dog?> Get(Guid id)
     {
-        return Task.FromResult(_mockStore[id]);
+        if (!_mockStore.ContainsKey(id))
+        {
+            return Task.FromResult<Dog?>(null);
+        }
+
+        return Task.FromResult<Dog?>(_mockStore[id]);
     }
 }
